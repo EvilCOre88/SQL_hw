@@ -1,4 +1,5 @@
 import sqlalchemy as sq
+
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -54,7 +55,7 @@ class Sale(Base):
     date_sale = sq.Column(sq.Date, nullable=False)
     id_stock = sq.Column(sq.Integer, sq.ForeignKey('stock.id'), nullable=False)
     count = sq.Column(sq.Integer, nullable=False)
-    stock3 = relationship(Stock, back_populates='sale')
+    stock3 = relationship('Stock', back_populates='sale')
 
 
 def create_tables(engine):

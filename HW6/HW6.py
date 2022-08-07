@@ -5,9 +5,15 @@ from sqlalchemy.orm import sessionmaker
 from Models import create_tables, Publisher, Book, Shop, Stock, Sale
 
 
-if __name__ == '__main__':
+def auth(user_auth_file, lines_count):
+    with open(user_auth_file, 'r') as file:
+        res = [file.readline().strip() for f in range(lines_count)]
+    return res
 
-    DSN = 'postgresql://postgres:Qwerty2022@localhost:5432/sql_alchemy_hw'
+
+if __name__ == '__main__':
+    postgres = auth('auth.txt', 3)
+    DSN = f'postgresql://{postgres[0]}:{postgres[1]}@localhost:5432/{postgres[2]}'
     engine = sqlalchemy.create_engine(DSN)
     create_tables(engine)
 
